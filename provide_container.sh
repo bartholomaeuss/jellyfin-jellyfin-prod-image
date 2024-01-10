@@ -19,7 +19,7 @@ provide_container(){
     ssh -l "${user}" "${remote}" "mkdir -p ~/jellyfin/media"
     ssh -l "${user}" "${remote}" "docker kill \$(docker ps -q --filter ancestor=${image}:${tag})"
     ssh -l "${user}" "${remote}" "docker build -t ${image}:${tag} -f ./${dockerfile} ."
-    ssh -l "${user}" "${remote}" "docker run -d --net=host --volume ~/jellyfin/config:/config --volume ~/jellyfin/cache:/cache --mount type=bind,source=/home/bart/jellyfin/media,target=/media --restart=unless-stopped ${image}:${tag}"
+    ssh -l "${user}" "${remote}" "docker run -d --net=host --volume ~/jellyfin/config:/config --volume ~/jellyfin/cache:/cache --volume ~/jellyfin/media:/media --restart=unless-stopped ${image}:${tag}"
     exit 0
 }
 

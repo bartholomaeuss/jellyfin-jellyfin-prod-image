@@ -1,8 +1,6 @@
-docker run -d  --name jellyfin\
-  --user 1000:0 \
-  --net=host \
-  --volume ~/jellyfin/config:/config \
-  --volume ~/jellyfin/cache:/cache \
-  --mount type=bind,source=~/jellyfin/media,target=/media \
-  --restart=unless-stopped \
-  jellyfin/jellyfin
+#!/bin/bash
+
+sudo apt-get -y install samba
+sudo apt-get -y install cifs-utils
+sudo apt-get -y install keyutils
+sudo apt-get -y install iftop
