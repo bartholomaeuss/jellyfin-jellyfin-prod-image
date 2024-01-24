@@ -13,6 +13,8 @@ show_help(){
 }
 
 provide_container(){
+    sudo mount -t cifs -o guest //BAgi-cloud/BAgi-space-tier-1 ~/jellyfin/media
+    #todo: fstab
     scp "${dockerfile}" "${user}@${remote}":"~/${dockerfile}"
     ssh -l "${user}" "${remote}" "mkdir -p ~/jellyfin/config"
     ssh -l "${user}" "${remote}" "mkdir -p ~/jellyfin/cache"
