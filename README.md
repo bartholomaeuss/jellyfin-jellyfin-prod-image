@@ -1,4 +1,4 @@
-# JELLYFIN IMAGE
+# JELLYFIN/JELLYFIN PROD IMAGE
 
 ### Prerequisite
 
