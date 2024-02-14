@@ -2,12 +2,11 @@
 
 ### Prerequisite
 
-
 ```bash
 ./hello_world.sh
 ```
 
-### Windows
+### Deploy
 
 ```bash
 ./provide_container.sh
@@ -18,10 +17,6 @@
 ```
 
 ### More
-
-```
-ssh -p 2223 -i ~/.ssh/<key> <user>@localhost
-```
 
 See the official
 [docker build](https://docs.docker.com/engine/reference/commandline/build/)

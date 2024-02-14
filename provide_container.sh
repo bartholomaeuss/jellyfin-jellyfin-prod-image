@@ -6,6 +6,7 @@ show_help(){
     echo "  -d  dockerfile name"
     echo "  -i  image name"
     echo "  -r  remote host name"
+    echo "  -s  absolute path to the network drive"
     echo "  -t  image tag name"
     echo "  -u  remote host user name"
     echo "  -h  show help"
@@ -13,8 +14,7 @@ show_help(){
 }
 
 provide_container(){
-    sudo mount -t cifs -o guest //BAgi-cloud/BAgi-space-tier-1 ~/jellyfin/media
-    #todo: fstab
+    ssh -v -l "${user}" "${remote}" "echo "${storage}  /home/${user}/jellyfin/media  cifs  guest,x-systemd.automount  0  0" | sudo tee -a /etc/fstab"
     scp "${dockerfile}" "${user}@${remote}":"~/${dockerfile}"
     ssh -l "${user}" "${remote}" "mkdir -p ~/jellyfin/config"
     ssh -l "${user}" "${remote}" "mkdir -p ~/jellyfin/cache"
@@ -25,7 +25,7 @@ provide_container(){
     exit 0
 }
 
-while getopts ":d:i:r:t:u:h" opt; do
+while getopts ":d:i:r:s:t:u:h" opt; do
   case $opt in
     d)
       dockerfile="$OPTARG"
@@ -35,6 +35,9 @@ while getopts ":d:i:r:t:u:h" opt; do
       ;;
     r)
       remote="$OPTARG"
+      ;;
+    s)
+      storage="$OPTARG"
       ;;
     t)
       tag="$OPTARG"
@@ -71,6 +74,12 @@ fi
 if [ -z "$remote" ]
 then
   echo "'-r' option is mandatory"
+  show_help
+fi
+
+if [ -z "$storage" ]
+then
+  echo "'-s' option is mandatory"
   show_help
 fi
 
