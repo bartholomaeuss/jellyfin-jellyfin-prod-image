@@ -1,3 +1,3 @@
-FROM jellyfin/jellyfin:latest
+FROM docker.io/jellyfin/jellyfin:latest
 
 WORKDIR /media
