@@ -1,4 +1,9 @@
 services:
-  media_toolbox:
+  jellyfin:
+    # Optional - specify the uid and gid you would like Jellyfin to use instead of root
+    #user: uid:gid
+    ports:
+      - 8096:8096
+      - 7359:7359
     build: .
     restart: unless-stopped
